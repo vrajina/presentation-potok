@@ -30,8 +30,8 @@
 .slide-cols { display: flex; align-items: stretch; width: 100%; height: 100%; }
 .col-text { flex: 1; padding: 3rem; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
 .col-center { justify-content: center; }
-.col-image { flex: 0 0 44%; max-width: 44%; overflow: hidden; padding: 0; margin: 0; }
-.col-image img { width: 100%; height: 100%; object-fit: cover; display: block; margin: 0; padding: 0; }
+.col-image { flex: 0 0 44%; max-width: 44%; overflow: hidden; padding: 0 !important; margin: 0 !important; position: relative; }
+.col-image img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block; margin: 0; padding: 0; }
 .slide-center { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; width: 100%; height: 100%; padding: 3rem; }
 
 /* === TITLE GLITCH — split green/magenta === */
@@ -143,7 +143,7 @@
 /* === CONTACTS === */
 .contacts { margin-top: 1.5rem; font-size: 1.1em; }
 .contacts p { margin: .4em 0; font-family: 'JetBrains Mono'; }
-.author-photo img { border: 2px solid var(--neon-green); box-shadow: 0 0 30px rgba(0,255,65,.2); }
+.author-photo img { border: none; box-shadow: none; }
 
 /* === FRAGMENTS === */
 .reveal .fragment { transition: all .4s ease; }
