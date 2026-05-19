@@ -1,0 +1,98 @@
+import puppeteer from 'puppeteer';
+import { PDFDocument } from 'pdf-lib';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { spawn } from 'child_process';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const TOTAL_SLIDES = 15;
+const WIDTH = 1920;
+const HEIGHT = 1080;
+const PORT = 4173;
+const OUTPUT = path.join(__dirname, 'presentation.pdf');
+
+async function waitForServer(url, maxWait = 15000) {
+  const start = Date.now();
+  while (Date.now() - start < maxWait) {
+    try {
+      await fetch(url);
+      return;
+    } catch {
+      await new Promise(r => setTimeout(r, 300));
+    }
+  }
+  throw new Error('Server did not start in time');
+}
+
+async function main() {
+  // 1. Start preview server
+  console.log('🌐 Starting preview server...');
+  const server = spawn('npx', ['astro', 'preview', '--port', String(PORT)], {
+    cwd: __dirname,
+    shell: true,
+    stdio: 'pipe',
+  });
+
+  server.stderr.on('data', d => {
+    const msg = d.toString();
+    if (msg.includes('Error')) console.error('  Server:', msg.trim());
+  });
+
+  await waitForServer(`http://localhost:${PORT}/`);
+  console.log(`  ✓ Server ready on port ${PORT}`);
+
+  // 2. Launch browser
+  console.log('🚀 Launching browser...');
+  const browser = await puppeteer.launch({ headless: true });
+  const page = await browser.newPage();
+  await page.setViewport({ width: WIDTH, height: HEIGHT, deviceScaleFactor: 2 });
+
+  // 3. Open presentation
+  console.log('📂 Loading presentation...');
+  await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle0', timeout: 20000 });
+  // Wait extra for fonts to load
+  await new Promise(r => setTimeout(r, 3000));
+
+  // 4. Screenshot each slide
+  const screenshots = [];
+  for (let i = 0; i < TOTAL_SLIDES; i++) {
+    console.log(`📸 Slide ${i + 1}/${TOTAL_SLIDES}...`);
+    await page.evaluate((idx) => {
+      const track = document.querySelector('.slides-track');
+      track.style.transition = 'none';
+      track.style.transform = `translateX(-${idx * 100}vw)`;
+    }, i);
+    await new Promise(r => setTimeout(r, 600));
+    const screenshot = await page.screenshot({
+      type: 'png',
+      clip: { x: 0, y: 0, width: WIDTH, height: HEIGHT }
+    });
+    screenshots.push(screenshot);
+  }
+
+  // 5. Build PDF
+  console.log('📄 Building PDF...');
+  const pdfDoc = await PDFDocument.create();
+  for (const screenshot of screenshots) {
+    const image = await pdfDoc.embedPng(screenshot);
+    const pageWidth = WIDTH * 0.5;
+    const pageHeight = HEIGHT * 0.5;
+    const pdfPage = pdfDoc.addPage([pageWidth, pageHeight]);
+    pdfPage.drawImage(image, { x: 0, y: 0, width: pageWidth, height: pageHeight });
+  }
+
+  const pdfBytes = await pdfDoc.save();
+  fs.writeFileSync(OUTPUT, pdfBytes);
+
+  // 6. Cleanup
+  await browser.close();
+  server.kill();
+  console.log(`✅ Done! PDF saved: ${OUTPUT}`);
+  console.log(`   ${TOTAL_SLIDES} slides, ${(pdfBytes.length / 1024 / 1024).toFixed(1)} MB`);
+}
+
+main().catch(e => {
+  console.error('❌ Error:', e.message);
+  process.exit(1);
+});
