@@ -30,8 +30,7 @@
 .slide-cols { display: flex; align-items: stretch; width: 100%; height: 100%; }
 .col-text { flex: 1; padding: 3rem; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
 .col-center { justify-content: center; }
-.col-image { flex: 0 0 44%; max-width: 44%; overflow: hidden; padding: 0 !important; margin: 0 !important; position: relative; }
-.col-image img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block; margin: 0; padding: 0; }
+.col-image { flex: 0 0 44%; max-width: 44%; padding: 0 !important; margin: 0 !important; background-size: cover; background-position: center center; background-repeat: no-repeat; }
 .slide-center { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; width: 100%; height: 100%; padding: 3rem; }
 
 /* === TITLE GLITCH — split green/magenta === */
