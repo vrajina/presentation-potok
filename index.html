@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Почему энтерпрайз-разработка должна умереть?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="scanlines"></div>
+<div class="reveal">
+<div class="slides">
+
+<!-- SLIDE 1: TITLE -->
+<section data-background-image="img/title.png" data-background-opacity="0.3">
+  <h1 class="glitch" data-text="Почему энтерпрайз-разработка должна умереть?">Почему энтерпрайз-разработка должна умереть?</h1>
+  <p class="subtitle">Вайбкодинг, AI-агенты и живой кейс Finn Flare</p>
+  <div class="author">
+    <span class="neon-cyan">Илья Кадацкий</span><br>
+    <span class="dim">Руководитель интернет-магазина FINN FLARE</span>
+  </div>
+</section>
+
+<!-- SLIDE 2: PROVOCATION -->
+<section data-background-image="img/money.png" data-background-opacity="0.2">
+  <h2 class="neon-magenta">Ваш ИТ-бюджет —</h2>
+  <h2 class="neon-magenta">не инвестиция.</h2>
+  <h1 class="neon-cyan fragment">Это дань устаревшей парадигме.</h1>
+</section>
+
+<!-- SLIDE 3: BIO -->
+<section>
+  <h2 class="neon-cyan">Обо мне</h2>
+  <div class="bio-grid">
+    <div class="bio-text">
+      <p>Строю digital и e-commerce системы федерального уровня там, где ресурсы ограничены, а планка — нет.</p>
+      <div class="timeline-compact">
+        <div class="timeline-item"><span class="neon-cyan">→</span> «Наше золото», Thomas Münz, Modi</div>
+        <div class="timeline-item"><span class="neon-cyan">→</span> Полноценные онлайн-платформы без раздутых смет</div>
+        <div class="timeline-item"><span class="neon-magenta">→</span> Сейчас: перестройка онлайна <strong>Finn Flare</strong></div>
+        <div class="timeline-item"><span class="neon-magenta">→</span> Компактная команда + оркестр AI-агентов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4: THE MYTH -->
+<section>
+  <h2 class="neon-cyan">Миф: «ИТ — это долго и дорого»</h2>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number neon-magenta">70%</div>
+      <div class="stat-label">крупных ИТ-проектов<br>выходят за бюджет</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number neon-magenta">12–18</div>
+      <div class="stat-label">месяцев — типичный<br>цикл до MVP</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number neon-magenta">₽₽₽</div>
+      <div class="stat-label">стоимость содержания<br>инхаус-команды</div>
+    </div>
+  </div>
+  <p class="fragment dim" style="margin-top:2rem;">А что если всё это — <span class="neon-cyan">необязательно</span>?</p>
+</section>
+
+<!-- SLIDE 5: WHAT IS VIBECODING -->
+<section data-background-image="img/conductor.png" data-background-opacity="0.25">
+  <h2 class="neon-cyan">Вайбкодинг —</h2>
+  <h2 class="neon-cyan">это не «AI пишет код за тебя»</h2>
+  <div class="fragment">
+    <p class="big-text">Это <span class="neon-magenta">ты — архитектор</span>,</p>
+    <p class="big-text">AI — <span class="neon-cyan">твой оркестр</span>.</p>
+  </div>
+</section>
+
+<!-- SLIDE 6: SYSTEM vs PROMPTS -->
+<section data-background-image="img/brain.png" data-background-opacity="0.2">
+  <h2 class="neon-cyan">Система в голове, а не промпты</h2>
+  <div class="comparison">
+    <div class="comp-bad">
+      <h3 class="neon-magenta">❌ Хаос промптов</h3>
+      <p>«Сделай мне сайт»</p>
+      <p>«Добавь кнопку»</p>
+      <p>«Почему сломалось?!»</p>
+      <p class="result">→ Мусор</p>
+    </div>
+    <div class="comp-good">
+      <h3 class="neon-cyan">✓ Архитектурное мышление</h3>
+      <p>Стратегия → Архитектура</p>
+      <p>Архитектура → Задачи</p>
+      <p>Задачи → Агенты</p>
+      <p class="result">→ Продукт</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7: SPEED -->
+<section data-background-image="img/speed.png" data-background-opacity="0.2">
+  <h2 class="neon-cyan">Сверхскорость проверки гипотез</h2>
+  <div class="speed-comparison">
+    <div class="speed-old">
+      <span class="label">Раньше</span>
+      <div class="speed-bar old"></div>
+      <span class="dim">Идея → Бриф → Тендер → Команда → Разработка → Тест</span>
+      <span class="neon-magenta">6–12 месяцев</span>
+    </div>
+    <div class="speed-new">
+      <span class="label">Сейчас</span>
+      <div class="speed-bar new"></div>
+      <span class="dim">Идея → Промпт → Прототип → Валидация</span>
+      <span class="neon-cyan">Часы — дни</span>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 8: FINN FLARE CASE INTRO -->
+<section>
+  <h2 class="neon-magenta">Живой кейс</h2>
+  <h1 class="neon-cyan" style="font-family:'Orbitron',sans-serif;font-size:3em;">FINN FLARE</h1>
+  <p class="dim" style="margin-top:1rem;">Легендарный fashion-бренд.<br>Компактная команда. Оркестр AI-агентов.<br>Несколько месяцев.</p>
+</section>
+
+<!-- SLIDE 9: STARTING POINT -->
+<section>
+  <h2 class="neon-cyan">Точка отсчёта</h2>
+  <div class="pain-list">
+    <div class="pain-item fragment"><span class="neon-magenta">▸</span> Легаси e-com платформа</div>
+    <div class="pain-item fragment"><span class="neon-magenta">▸</span> Ограниченные ресурсы разработки</div>
+    <div class="pain-item fragment"><span class="neon-magenta">▸</span> Амбициозные бизнес-цели</div>
+    <div class="pain-item fragment"><span class="neon-magenta">▸</span> Рынок не ждёт</div>
+  </div>
+  <p class="fragment neon-cyan" style="margin-top:2rem;font-size:1.3em;">Классический ответ: «Наймите 20 разработчиков»</p>
+  <p class="fragment neon-magenta" style="font-size:1.5em;font-weight:700;">Наш ответ: «Нет.»</p>
+</section>
+
+<!-- SLIDE 10: TIMELINE -->
+<section>
+  <h2 class="neon-cyan">От стратегии до кода</h2>
+  <div class="timeline-visual">
+    <div class="tl-step fragment">
+      <div class="tl-marker neon-cyan">01</div>
+      <div class="tl-content">
+        <h3>Стратегия и архитектура</h3>
+        <p class="dim">Анализ, выбор стека, проектирование</p>
+      </div>
+    </div>
+    <div class="tl-step fragment">
+      <div class="tl-marker neon-cyan">02</div>
+      <div class="tl-content">
+        <h3>Настройка AI-оркестра</h3>
+        <p class="dim">Агенты, пайплайны, контроль качества</p>
+      </div>
+    </div>
+    <div class="tl-step fragment">
+      <div class="tl-marker neon-magenta">03</div>
+      <div class="tl-content">
+        <h3>Разработка и итерации</h3>
+        <p class="dim">Первый код → рабочий прототип</p>
+      </div>
+    </div>
+  </div>
+  <p class="fragment" style="margin-top:2rem;text-align:center;">
+    <span class="neon-cyan" style="font-size:1.5em;font-family:'Orbitron';">Всё — за пару месяцев</span>
+  </p>
+</section>
+
+<!-- SLIDE 11: HOW TO REPEAT -->
+<section>
+  <h2 class="neon-cyan">Как повторить: 3 шага</h2>
+  <div class="steps-grid">
+    <div class="step-card fragment">
+      <div class="step-num neon-magenta">01</div>
+      <h3>Сломайте парадигму</h3>
+      <p class="dim">Перестаньте думать: «нам нужна команда из 20 человек»</p>
+    </div>
+    <div class="step-card fragment">
+      <div class="step-num neon-magenta">02</div>
+      <h3>Станьте архитектором</h3>
+      <p class="dim">Не менеджером задач, а тем, кто понимает систему</p>
+    </div>
+    <div class="step-card fragment">
+      <div class="step-num neon-magenta">03</div>
+      <h3>Запустите AI-оркестр</h3>
+      <p class="dim">Конкретные инструменты, пайплайны, контроль</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 12: MANIFESTO -->
+<section data-background-image="img/phoenix.png" data-background-opacity="0.3">
+  <h2 class="dim">Энтерпрайз-разработка</h2>
+  <h2 class="dim">должна умереть.</h2>
+  <h1 class="fragment neon-cyan glitch" data-text="Чтобы возродиться." style="margin-top:1em;">Чтобы возродиться.</h1>
+</section>
+
+<!-- SLIDE 13: Q&A -->
+<section>
+  <h1 class="neon-cyan">Q&A</h1>
+  <div class="contacts">
+    <p><span class="neon-magenta">TG:</span> @kadatsky</p>
+    <p><span class="neon-magenta">Роль:</span> Руководитель интернет-магазина FINN FLARE</p>
+  </div>
+  <p class="dim" style="margin-top:3rem;font-size:0.8em;">Спасибо за внимание 🚀</p>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  transition: 'fade',
+  transitionSpeed: 'slow',
+  backgroundTransition: 'fade',
+  center: true,
+  width: 1920,
+  height: 1080
+});
+</script>
+</body>
+</html>
