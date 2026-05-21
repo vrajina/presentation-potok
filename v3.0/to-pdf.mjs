@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TOTAL_SLIDES = 15;
 const WIDTH = 1920;
 const HEIGHT = 1080;
-const PORT = 4173;
+const PORT = 4188;
 const OUTPUT = path.join(__dirname, 'presentation.pdf');
 
 async function waitForServer(url, maxWait = 15000) {
@@ -28,7 +28,7 @@ async function waitForServer(url, maxWait = 15000) {
 async function main() {
   // 1. Start preview server
   console.log('🌐 Starting preview server...');
-  const server = spawn('npx', ['astro', 'preview', '--port', String(PORT)], {
+  const server = spawn('npx', ['astro', 'preview', '--host', '127.0.0.1', '--port', String(PORT)], {
     cwd: __dirname,
     shell: true,
     stdio: 'pipe',
@@ -39,18 +39,21 @@ async function main() {
     if (msg.includes('Error')) console.error('  Server:', msg.trim());
   });
 
-  await waitForServer(`http://localhost:${PORT}/`);
+  await waitForServer(`http://127.0.0.1:${PORT}/`);
   console.log(`  ✓ Server ready on port ${PORT}`);
 
   // 2. Launch browser
   console.log('🚀 Launching browser...');
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({
+    headless: 'shell',
+    args: [`--window-size=${WIDTH},${HEIGHT}`, '--disable-gpu', '--no-sandbox']
+  });
   const page = await browser.newPage();
-  await page.setViewport({ width: WIDTH, height: HEIGHT, deviceScaleFactor: 2 });
+  await page.setViewport({ width: WIDTH, height: HEIGHT, deviceScaleFactor: 1 });
 
   // 3. Open presentation
   console.log('📂 Loading presentation...');
-  await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle0', timeout: 20000 });
+  await page.goto(`http://127.0.0.1:${PORT}/`, { waitUntil: 'networkidle0', timeout: 60000 });
   // Wait extra for fonts to load
   await new Promise(r => setTimeout(r, 3000));
 
