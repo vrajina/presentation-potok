@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import { spawn } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const TOTAL_SLIDES = 15;
+const TOTAL_SLIDES = 16;
 const WIDTH = 1920;
 const HEIGHT = 1080;
 const PORT = 4188;
