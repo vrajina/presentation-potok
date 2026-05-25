@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Заметки спикера — Почему энтерпрайз-разработка должна умереть?</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; font-size: 11pt; line-height: 1.55; color: #1a1a1a; padding: 2cm 2.5cm; }
+  @media print {
+    body { padding: 1.5cm 2cm; }
+    .no-print { display: none; }
+    h2 { page-break-before: auto; }
+    .slide-block { page-break-inside: avoid; }
+  }
+  h1 { font-size: 16pt; margin-bottom: 4pt; }
+  .meta { font-size: 10pt; color: #666; margin-bottom: 18pt; }
+  h2 { font-size: 13pt; color: #0a6e1e; border-bottom: 2px solid #00cc33; padding-bottom: 3pt; margin-top: 20pt; margin-bottom: 8pt; }
+  .slide-block { margin-bottom: 14pt; }
+  .direction { font-size: 10pt; color: #555; font-style: italic; margin-bottom: 6pt; }
+  blockquote { margin: 6pt 0; padding: 6pt 12pt; border-left: 3px solid #00cc33; background: #f4fdf5; font-size: 10.5pt; }
+  blockquote p { margin: 0; }
+  .label { display: inline-block; font-size: 9pt; font-weight: 700; color: #c40060; background: #fff0f5; padding: 1pt 6pt; border-radius: 3px; margin: 6pt 0 4pt; }
+  hr { border: none; border-top: 1px solid #ddd; margin: 14pt 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 10pt; margin-top: 10pt; }
+  th, td { border: 1px solid #ccc; padding: 4pt 8pt; text-align: left; }
+  th { background: #f0f0f0; }
+  .print-btn { position: fixed; top: 20px; right: 20px; background: #00cc33; color: #fff; border: none; padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .print-btn:hover { background: #00aa2a; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ Печать</button>
+
+<h1>Тезисы доклада: «Почему энтерпрайз-разработка должна умереть?»</h1>
+<p class="meta">Хронометраж: ~20 минут &nbsp;|&nbsp; 16 слайдов, каждый ~60–90 сек</p>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 1 — Титульный (30 сек)</h2>
+<p class="direction">Представиться. Тема провокационная, но за ней — реальный опыт и живой кейс.</p>
+<blockquote><p>«Меня зовут Илья Кадацкий, я руковожу интернет-магазином FINN FLARE. Сегодня расскажу, почему мы решили, что классический подход к разработке — это тупик, и что мы сделали вместо этого.»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 2 — Провокация: «Ваш ИТ-бюджет — не инвестиция» (60 сек)</h2>
+<p class="direction">Зацепить аудиторию. ИТ-расходы — не результат, а обслуживание устаревшей модели.</p>
+<blockquote><p>«Сколько раз вы слышали: "нам нужно ещё полгода и ещё три разработчика"? Мы привыкли, что ИТ — дорого, долго и сложно. Но что если эта парадигма — не объективная реальность, а просто привычка?»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 3 — Обо мне (60 сек)</h2>
+<p class="direction">Коротко о себе, фокус — ограниченные ресурсы + высокие требования.</p>
+<blockquote><p>«Я в digital с 2006 года. Строил онлайн-платформы для "Наше золото", Thomas Münz, Modi — всегда в условиях, где бюджет ограничен, а амбиции — нет. Сейчас перестраиваю весь онлайн FINN FLARE — компактной командой, усиленной оркестром AI-агентов.»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 4 — Миф: «ИТ — это дорого и долго» (90 сек)</h2>
+<p class="direction">Конкретные цифры → боль аудитории → подвести к AI.</p>
+<blockquote><p>«70% крупных ИТ-проектов выходят за бюджет — данные Standish Group. Типичный цикл до MVP — 12–18 месяцев. Стоимость инхаус-команды из 10–15 человек — десятки миллионов в год.»</p></blockquote>
+<blockquote><p>«А что если всё это — необязательно? Не потому что задачи стали проще, а потому что инструменты кардинально изменились.»</p></blockquote>
+<span class="label">КЛЮЧЕВАЯ МЫСЛЬ — подвести к AI</span>
+<blockquote><p>«Для меня AI — это не новая форма жизни. Это огромные вычислительные мощности, которым доступны знания, накопленные поколениями людей. Всё, что человечество написало, исследовало, запрограммировало — доступно по щелчку пальцев.»</p></blockquote>
+<blockquote><p>«Пример: NASA загрузила в AI данные, которые телескоп TESS собирал годами. AI обработал их за часы и нашёл аномалии, которые астрономы пропустили за десятилетия ручного анализа. Та же логика применима к разработке.»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 5 — Вайбкодинг: определение (60 сек)</h2>
+<p class="direction">Чёткое определение, убрать мифы.</p>
+<blockquote><p>«Вайбкодинг — это НЕ "AI пишет код за тебя". Это архитектурный подход, где ты — дирижёр, а AI — твой оркестр.»</p></blockquote>
+<blockquote><p>«Ты определяешь стратегию, архитектуру, ограничения. AI выполняет рутину: пишет код, рефакторит, тестирует, генерирует документацию. Но все решения — твои.»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 6 — Система в голове, а не промпты (90 сек)</h2>
+<p class="direction">Ключевой методологический слайд. Хаос vs. система.</p>
+<blockquote><p>«Главная ошибка новичков — думать, что достаточно хороших промптов. "Сделай мне сайт", "добавь кнопку", "почему сломалось" — это путь к мусору.»</p></blockquote>
+<blockquote><p>«Рабочий подход: стратегия → архитектура → задачи → агенты в контексте с чёткими инструкциями.»</p></blockquote>
+<blockquote><p>«AI без архитектора — как оркестр без дирижёра. Каждый музыкант играет блестяще, но все вместе — какофония.»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 7 — Сверхскорость проверки гипотез (60 сек)</h2>
+<p class="direction">Контраст скоростей + честная оговорка.</p>
+<blockquote><p>«Раньше путь от идеи до прототипа — минимум полгода. Согласования, брифы, тендеры... К моменту, когда вы что-то покажете, рынок ушёл вперёд.»</p></blockquote>
+<blockquote><p>«Сейчас: идея → команда с AI-агентами → прототип MVP. Не идеальный, не финальный — но рабочий.»</p></blockquote>
+<span class="label">ЧЕСТНАЯ ОГОВОРКА</span>
+<blockquote><p>«Хотя, если честно, я немного лукавлю. Скорее всего, будут точно такие же тендеры — только между командами AI-разработки. И согласования никуда не денутся — корпоративную культуру AI не починит.»</p></blockquote>
+<blockquote><p>«Реальный выигрыш — AI убирает рутину написания кода. Бойлерплейт, CRUD, тесты, рефакторинг — то, что занимало 80% времени, сжимается с недель до часов.»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 8 — Живой кейс FINN FLARE (30 сек)</h2>
+<p class="direction">Переходный. Обозначить реальный кейс.</p>
+<blockquote><p>«Это не теория. Всё это мы применяем в FINN FLARE прямо сейчас. Давайте покажу.»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 9 — О бренде FINN FLARE (60 сек)</h2>
+<p class="direction">Контекст масштаба: не стартап, а серьёзный бизнес.</p>
+<blockquote><p>«FINN FLARE — бренд с 60-летней историей. 70+ розничных магазинов. Все ключевые маркетплейсы. Собственный интернет-магазин, мобильное приложение для клиентов, отдельное приложение для 300 консультантов.»</p></blockquote>
+<blockquote><p>«Это федеральный fashion-бренд с серьёзной ИТ-инфраструктурой.»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 10 — Точка отсчёта (60 сек)</h2>
+<p class="direction">Стартовая ситуация — аудитория узнаёт себя.</p>
+<blockquote><p>«Типичная ситуация: легаси-платформа, ограниченные ресурсы, амбициозные цели, рынок не ждёт.»</p></blockquote>
+<blockquote><p>«Классический ответ: "наймите 20 разработчиков". Наш: "Нет. Мы пойдём другим путём."»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 11 — От стратегии до кода (90 сек)</h2>
+<p class="direction">Конкретный процесс в три этапа.</p>
+<blockquote><p>«01. Стратегия и архитектура — анализ, стек, проектирование. Это делает человек, не AI.»</p></blockquote>
+<blockquote><p>«02. Настройка AI-оркестра — роли агентов, пайплайны, контроль качества.»</p></blockquote>
+<blockquote><p>«03. Итеративная разработка — первый код быстро, дальше цикл улучшений.»</p></blockquote>
+<blockquote><p>«Всё — за несколько месяцев. Не лет.»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 12 — Как повторить: 3 шага (60 сек)</h2>
+<p class="direction">Практика — что делать слушателям.</p>
+<blockquote><p>«01. Сломайте парадигму — армия разработчиков больше не нужна.»</p></blockquote>
+<blockquote><p>«02. Станьте архитектором — не менеджером задач, а тем, кто понимает систему.»</p></blockquote>
+<blockquote><p>«03. Запустите AI-оркестр — конкретные инструменты, пайплайны, контроль.»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 13 — Манифест (30 сек)</h2>
+<p class="direction">Эмоциональная кульминация. Пауза, дать прочитать.</p>
+<blockquote><p>«Энтерпрайз-разработка должна умереть. Чтобы переродиться в AI-FIRST инжиниринг.»</p></blockquote>
+<blockquote><p>«Это не про замену людей. Один архитектор с AI-оркестром = целая команда.»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 14 — Инструменты вайбкодинга (90 сек)</h2>
+<p class="direction">Конкретика: что используем.</p>
+<blockquote><p>«IDE: Cursor, Windsurf, Claude Code, Antigravity. No-code: Bolt, v0, Lovable.»</p></blockquote>
+<blockquote><p>«Модели: Claude 4, GPT-4.1, Gemini 2.5, DeepSeek — разные модели для разных задач.»</p></blockquote>
+<blockquote><p>«Оркестр по ролям: оркестратор, аналитик, архитектор, разработчик, дизайнер.»</p></blockquote>
+<blockquote><p>«Ключевое — во главе архитектор-инженер. Без него — просто игрушки.»</p></blockquote>
+<span class="label">ПРИМЕР ИЗ ИНДУСТРИИ</span>
+<blockquote><p>«Крупные компании уже идут по этому пути. Конечно, не без косяков — AI-агент в Cursor удалил рабочую БД, потому что "решил", что она мешает. Вот почему нужен человек во главе.»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 15 — О чём молчат евангелисты (90 сек)</h2>
+<p class="direction">Честный разговор о рисках. Добавляет доверия.</p>
+<blockquote><p>«AI галлюцинирует — пишет код, который выглядит идеально, но не работает. С абсолютной уверенностью.»</p></blockquote>
+<blockquote><p>«Без экспертизы техдолг копится незаметно. Через полгода — каша, которую дешевле переписать.»</p></blockquote>
+<blockquote><p>«Безопасность: AI не думает про уязвимости за вас. SQL-инъекции, утечки, незащищённые API.»</p></blockquote>
+<blockquote><p>«Зависимость от провайдеров: цены, лимиты, даунтаймы.»</p></blockquote>
+<blockquote><p>«Вайбкодинг — усилитель, а не замена головы. Без архитектурного мышления AI бесполезен. Или, что хуже, — опасен.»</p></blockquote>
+</div>
+
+<hr>
+
+<div class="slide-block">
+<h2>Слайд 16 — Q&A (60+ сек)</h2>
+<p class="direction">Завершение, открыть дискуссию.</p>
+<blockquote><p>«Спасибо за внимание. Буду рад ответить на вопросы. TG: @ivkadatsky»</p></blockquote>
+</div>
+
+<hr>
+
+<h2 style="color:#333;">Общий тайминг</h2>
+<table>
+<thead><tr><th>Блок</th><th>Слайды</th><th>Время</th></tr></thead>
+<tbody>
+<tr><td>Вступление и контекст</td><td>1–4</td><td>~4 мин</td></tr>
+<tr><td>Методология вайбкодинга</td><td>5–7</td><td>~3.5 мин</td></tr>
+<tr><td>Кейс FINN FLARE</td><td>8–11</td><td>~4 мин</td></tr>
+<tr><td>Практика и инструменты</td><td>12–14</td><td>~3 мин</td></tr>
+<tr><td>Философия и риски</td><td>13, 15</td><td>~2 мин</td></tr>
+<tr><td>Q&A</td><td>16</td><td>~3+ мин</td></tr>
+<tr><td><strong>Итого</strong></td><td></td><td><strong>~20 мин</strong></td></tr>
+</tbody>
+</table>
+
+</body>
+</html>
