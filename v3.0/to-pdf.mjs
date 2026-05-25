@@ -61,11 +61,22 @@ async function main() {
   const screenshots = [];
   for (let i = 0; i < TOTAL_SLIDES; i++) {
     console.log(`📸 Slide ${i + 1}/${TOTAL_SLIDES}...`);
-    await page.evaluate((idx) => {
+    await page.evaluate((idx, total) => {
       const track = document.querySelector('.slides-track');
       track.style.transition = 'none';
       track.style.transform = `translateX(-${idx * 100}vw)`;
-    }, i);
+      // Update counter
+      const cur = document.querySelector('.nav-counter-current');
+      if (cur) cur.textContent = idx + 1;
+      // Update progress bar
+      const bar = document.querySelector('.nav-progress');
+      if (bar) bar.style.width = `${((idx + 1) / total) * 100}%`;
+      // Update nav buttons visibility
+      const prev = document.querySelector('.nav-prev');
+      const next = document.querySelector('.nav-next');
+      if (prev) prev.classList.toggle('hidden', idx === 0);
+      if (next) next.classList.toggle('hidden', idx === total - 1);
+    }, i, TOTAL_SLIDES);
     await new Promise(r => setTimeout(r, 600));
     const screenshot = await page.screenshot({
       type: 'png',
