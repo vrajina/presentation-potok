@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Figma → Code через AI IDE: исследование best practices</title>
+<meta name="description" content="Исследование лучших практик разработки фронтенда из дизайна Figma с помощью AI-powered IDE. Июнь 2026.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f0f13;--surface:#1a1a23;--surface2:#22222e;--border:#2a2a3a;--text:#e4e4ef;--text2:#9999b3;--accent:#7c5cfc;--accent2:#a78bfa;--green:#34d399;--yellow:#fbbf24;--red:#f87171;--blue:#60a5fa;--radius:12px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px}
+.container{max-width:860px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,var(--accent2),var(--accent),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;line-height:1.3}
+.subtitle{color:var(--text2);font-size:.9rem;margin-bottom:48px;padding:12px 16px;background:var(--surface);border-radius:var(--radius);border-left:3px solid var(--accent)}
+h2{font-size:1.5rem;font-weight:700;margin:48px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--border);color:var(--text)}
+h2 .num{color:var(--accent2);margin-right:8px}
+h3{font-size:1.1rem;font-weight:600;margin:28px 0 12px;color:var(--text)}
+p{margin:12px 0;color:var(--text)}
+strong{color:#fff}
+code{background:var(--surface2);padding:2px 7px;border-radius:6px;font-size:.88em;color:var(--accent2);font-family:'Fira Code',monospace}
+pre{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;overflow-x:auto;margin:16px 0;font-size:.88rem;color:var(--green);line-height:1.6}
+pre code{background:none;padding:0;color:inherit}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.92rem}
+th{background:var(--surface2);color:var(--accent2);font-weight:600;text-align:left;padding:12px 16px;border-bottom:2px solid var(--accent)}
+td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--text)}
+tr:hover td{background:var(--surface)}
+.callout{padding:16px 20px;border-radius:var(--radius);margin:20px 0;font-size:.95rem}
+.callout-important{background:rgba(124,92,252,.1);border-left:4px solid var(--accent)}
+.callout-warning{background:rgba(251,191,36,.08);border-left:4px solid var(--yellow)}
+.callout-note{background:rgba(96,165,250,.08);border-left:4px solid var(--blue)}
+.callout-title{font-weight:700;margin-bottom:6px;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px}
+.callout-important .callout-title{color:var(--accent2)}
+.callout-warning .callout-title{color:var(--yellow)}
+.callout-note .callout-title{color:var(--blue)}
+ul,ol{margin:12px 0;padding-left:24px}
+li{margin:6px 0;color:var(--text)}
+li strong{color:#fff}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:20px 0;justify-content:center}
+.flow-step{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;text-align:center;font-size:.85rem;min-width:140px;flex:1;transition:border-color .2s}
+.flow-step:hover{border-color:var(--accent)}
+.flow-step .step-num{display:block;font-size:.75rem;color:var(--accent2);font-weight:700;margin-bottom:4px}
+.flow-arrow{color:var(--accent);font-size:1.2rem;flex:0}
+.checklist{list-style:none;padding-left:0}
+.checklist li{padding:8px 12px;background:var(--surface);margin:6px 0;border-radius:8px;border-left:3px solid var(--border)}
+.checklist li::before{content:"☐ ";color:var(--accent2)}
+.tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.78rem;font-weight:600;margin:2px}
+.tag-green{background:rgba(52,211,153,.15);color:var(--green)}
+.tag-yellow{background:rgba(251,191,36,.15);color:var(--yellow)}
+.tag-red{background:rgba(248,113,113,.12);color:var(--red)}
+.tag-blue{background:rgba(96,165,250,.15);color:var(--blue)}
+.sources{margin-top:48px;padding:20px;background:var(--surface);border-radius:var(--radius)}
+.sources a{color:var(--accent2);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
+.sources a:hover{border-color:var(--accent2)}
+.sandwich{display:grid;grid-template-columns:1fr;gap:8px;margin:16px 0}
+.sandwich-step{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--surface);border-radius:var(--radius)}
+.sandwich-step .icon{font-size:1.4rem;flex-shrink:0}
+@media(max-width:600px){h1{font-size:1.6rem}h2{font-size:1.2rem}.flow{flex-direction:column}.flow-arrow{transform:rotate(90deg)}table{font-size:.82rem}th,td{padding:8px 10px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Figma → Code через AI IDE</h1>
+<p style="font-size:1.15rem;color:var(--text2);margin-bottom:8px;">Исследование best practices</p>
+<div class="subtitle">Актуально на июнь 2026. Источники: builder.io, urbaninsight.com, monterail.com, sixtythirtyten.co, документация Figma.</div>
+
+<!-- Section: Key Shift -->
+<h2>Ключевой сдвиг 2025–2026: от скриншотов к структурированным данным</h2>
+<p>Раньше AI получал <strong>скриншот</strong> макета и «угадывал» отступы, цвета, иерархию компонентов.</p>
+<p>Сейчас золотой стандарт — <strong>Model Context Protocol (MCP)</strong>: AI-агент в IDE читает <strong>реальные данные</strong> из Figma — токены, flex-свойства, типографику, структуру компонентов. Это радикально снижает «галлюцинации» и ручную правку.</p>
+
+<!-- Section 1 -->
+<h2><span class="num">01</span> Подготовка дизайна в Figma</h2>
+
+<div class="callout callout-important">
+  <div class="callout-title">⚠ Важно</div>
+  <strong>Garbage in — garbage out.</strong> Никакой AI не сделает хороший код из грязного файла Figma. Подготовка дизайна — это 50% успеха.
+</div>
+
+<table>
+<tr><th>Требование</th><th>Зачем</th></tr>
+<tr><td><strong>Auto Layout</strong></td><td>AI понимает адаптивность и связи между элементами. Без этого — абсолютное позиционирование и невалидный CSS</td></tr>
+<tr><td><strong>Design Tokens (Variables)</strong></td><td>Цвета, отступы, типографика через переменные. Иначе AI выдаст захардкоженные HEX-значения</td></tr>
+<tr><td><strong>Компонентная архитектура</strong></td><td>Переиспользуемые паттерны (карточки, хедеры, кнопки). AI лучше работает с целыми компонентами</td></tr>
+<tr><td><strong>Семантические имена слоёв</strong></td><td><code>PrimaryButton</code> вместо <code>Frame 123</code>. Прямо влияет на читаемость кода</td></tr>
+<tr><td><strong>Логическая группировка</strong></td><td>Группы = границы компонентов. Помогает AI генерировать модульный код</td></tr>
+</table>
+
+<!-- Section 2 -->
+<h2><span class="num">02</span> Figma MCP — основной инструмент связки</h2>
+<p><strong>Figma MCP Server</strong> — мост между IDE и данными дизайна. AI-агент читает не пиксели, а реальную структуру: padding, flex, типографику, варианты компонентов.</p>
+
+<h3>Настройка в Cursor</h3>
+<pre><code>1. Ctrl+Shift+P → Open Chat
+2. Ввести: /add-plugin figma
+3. Cursor Settings → Tools & MCP → Connect (авторизация Figma)</code></pre>
+
+<h3>Настройка в VS Code</h3>
+<p>Создать файл <code>.vscode/mcp.json</code>:</p>
+<pre><code>{
+  "inputs": [],
+  "servers": {
+    "figma": {
+      "url": "https://mcp.figma.com/mcp",
+      "type": "http"
+    }
+  }
+}</code></pre>
+<p>Нажать <strong>Start</strong> → авторизоваться через браузер.</p>
+
+<h3>Требования к аккаунту</h3>
+<p>Нужен <strong>Dev Seat</strong> или <strong>Full Seat</strong> на плане Professional / Organization / Enterprise.</p>
+
+<!-- Section 3 -->
+<h2><span class="num">03</span> Figma Code Connect — маппинг компонентов</h2>
+<p>Code Connect связывает компоненты Figma с <strong>реальными компонентами в коде</strong>. Когда AI видит <code>Button</code> в Figma, он не генерирует новую кнопку, а использует <strong>существующий</strong> <code>&lt;Button variant="primary" /&gt;</code>.</p>
+
+<table>
+<tr><th>Способ</th><th>Для кого</th><th>Плюсы</th><th>Минусы</th></tr>
+<tr><td><strong>CLI</strong></td><td>Разработчики</td><td>Полный контроль, маппинг сложных пропсов</td><td>Нужно писать template-файлы</td></tr>
+<tr><td><strong>UI</strong></td><td>Команды</td><td>Быстрая настройка, несколько фреймворков</td><td>Нет live-сниппетов в Inspect</td></tr>
+</table>
+
+<ul>
+  <li><strong>Начинать с базовых компонентов:</strong> Button, Input, Card, Badge</li>
+  <li><strong>Единые имена:</strong> пропсы в коде = свойства в Figma</li>
+  <li><strong>Поддерживать актуальность:</strong> маппинги = живая документация</li>
+</ul>
+
+<!-- Section 4 -->
+<h2><span class="num">04</span> Рабочий процесс разработки</h2>
+
+<div class="callout callout-warning">
+  <div class="callout-title">⚠ Предупреждение</div>
+  Не просите AI «собрать всю страницу целиком». Это даёт худшие результаты. Работайте покомпонентно.
+</div>
+
+<h3>Итеративный подход</h3>
+<div class="flow">
+  <div class="flow-step"><span class="step-num">1</span>Скопировать ссылку<br>на фрейм в Figma</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="step-num">2</span>Вставить в чат IDE<br>+ точный промпт</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="step-num">3</span>AI генерирует<br>компонент (~80%)</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="step-num">4</span>Разработчик<br>дорабатывает (20%)</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step"><span class="step-num">5</span>Visual QA:<br>сравнение с макетом</div>
+</div>
+
+<h3>«Метод сэндвича» для продакшена</h3>
+<div class="sandwich">
+  <div class="sandwich-step"><span class="icon">👤</span><div><strong>Человек</strong> — определяет бизнес-цель и контекст (AI этого не знает)</div></div>
+  <div class="sandwich-step"><span class="icon">🤖</span><div><strong>AI</strong> — генерирует структуру компонента на основе дизайна</div></div>
+  <div class="sandwich-step"><span class="icon">👤</span><div><strong>Человек</strong> — ревью: edge cases, доступность (a11y), интеграция с кодовой базой</div></div>
+</div>
+
+<!-- Section 5 -->
+<h2><span class="num">05</span> Инструменты: когда что использовать</h2>
+<table>
+<tr><th>Задача</th><th>Инструмент</th><th>Почему</th></tr>
+<tr><td>Добавление компонентов в существующий проект</td><td><span class="tag tag-green">Figma MCP + Cursor/VS Code</span></td><td>Точные данные, не ломает паттерны</td></tr>
+<tr><td>Новый проект / MVP</td><td><span class="tag tag-blue">v0, Builder.io</span></td><td>Быстрый scaffolding целых страниц</td></tr>
+<tr><td>Дизайн-система с вариантами</td><td><span class="tag tag-yellow">Locofy / Code Connect</span></td><td>Сложные пропсы и варианты</td></tr>
+<tr><td>Visual QA</td><td><span class="tag tag-blue">Browser MCP + IDE</span></td><td>Автосравнение скриншота с макетом</td></tr>
+</table>
+
+<!-- Section 6 -->
+<h2><span class="num">06</span> Builder.io Visual Copilot</h2>
+<p>Наиболее зрелый инструмент для <strong>production-ready</strong> конвертации Figma → код.</p>
+
+<table>
+<tr><th style="color:var(--green)">✓ Плюсы</th><th style="color:var(--red)">✗ Минусы</th></tr>
+<tr><td>Маппинг на реальные компоненты кода</td><td>Крутая кривая обучения</td></tr>
+<tr><td>React, Next.js, Vue, Angular, Svelte</td><td>Дорогие тарифы для команд</td></tr>
+<tr><td>Интеграция с Git-workflow</td><td>Всё равно нужен ревью разработчика</td></tr>
+</table>
+
+<div class="callout callout-note">
+  <div class="callout-title">ℹ Ожидания</div>
+  Маркетинг обещает 90% экономии. <strong>Реальный прирост: 10–15%</strong> end-to-end. Builder.io имеет смысл для растущих и enterprise-команд с готовой дизайн-системой.
+</div>
+
+<!-- Section 7 -->
+<h2><span class="num">07</span> Практические рекомендации</h2>
+
+<h3>Минимальный набор для старта</h3>
+<ol>
+  <li>Figma (Professional план + Dev Seat)</li>
+  <li>Cursor IDE (или VS Code с GitHub Copilot)</li>
+  <li>Figma MCP — подключение за 5 минут</li>
+</ol>
+
+<h3>Чеклист подготовки Figma-файлов для дизайнеров</h3>
+<ul class="checklist">
+  <li>Все компоненты используют Auto Layout</li>
+  <li>Цвета, отступы, шрифты — через Variables (не захардкожены)</li>
+  <li>Слои названы семантически (<code>ProductCard</code>, не <code>Frame 47</code>)</li>
+  <li>Компоненты переиспользуемые, с вариантами</li>
+  <li>Группировка отражает логическую структуру UI</li>
+</ul>
+
+<h3>Этапы внедрения</h3>
+<table>
+<tr><th>Этап</th><th>Что делать</th><th>Срок</th></tr>
+<tr><td><span class="tag tag-green">1. Пилот</span></td><td>Подключить Figma MCP к Cursor, попробовать на 2–3 компонентах</td><td>1 день</td></tr>
+<tr><td><span class="tag tag-blue">2. Подготовка</span></td><td>Обучить дизайнеров правилам подготовки файлов</td><td>1–2 недели</td></tr>
+<tr><td><span class="tag tag-yellow">3. Code Connect</span></td><td>Замаппить базовые компоненты дизайн-системы</td><td>1 неделя</td></tr>
+<tr><td><span class="tag tag-green">4. Workflow</span></td><td>Интегрировать в ежедневный процесс</td><td>Постоянно</td></tr>
+</table>
+
+<!-- Sources -->
+<div class="sources">
+  <h3 style="margin-top:0">Источники</h3>
+  <ul>
+    <li><a href="https://urbaninsight.com">urbaninsight.com — Figma MCP workflow</a></li>
+    <li><a href="https://monterail.com">monterail.com — AI code generation best practices</a></li>
+    <li><a href="https://sixtythirtyten.co">sixtythirtyten.co — Builder.io analysis</a></li>
+    <li><a href="https://builder.io">builder.io — Visual Copilot documentation</a></li>
+    <li><a href="https://www.figma.com/developers/code-connect">Figma — Code Connect documentation</a></li>
+    <li><a href="https://mcp.figma.com">Figma — MCP server</a></li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>
